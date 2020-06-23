@@ -58,7 +58,7 @@ print(" 1,2,3,4,5,6,7,8  Resets one of the RPi's")
 ##jwc o print("*NOTE - The RPi's are NOT connected chronilogically, see below for specific relay mapping")
 ##jwc o print("RPi_1 = 1 , RPi_2 = 2, RPi_3 = 4, RPi_4 = 5, RPi_6 = 7, RPi_7 = 8")
 print("    RPi_1 = 1 , RPi_2 = 2, RPi_3 = 3, RPi_4 = 4, RPi_6 = 6, RPi_7 = 7 (RPi_5 = RelaySwitchAdmin)")
-print("    Exit = x")
+print("    Quit = q")
 print("")
 
 while True:
@@ -115,9 +115,9 @@ while True:
         #print("Count: {0}".format(count), end='\r', flush=True)
         
 
-    elif(char == "x"):
+    elif(char == "q"):
         print("")
-        print("Exit")
+        print("Quit")
         GPIO.cleanup()
         exit(0)
 

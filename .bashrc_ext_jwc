@@ -209,7 +209,7 @@ do
    echo "      ap = Admin: Power-Cycle ~ Hard Reboot       (+ SymLinks)"
    echo "      ab = Admin: Battery Monitor & Email Warning (+ SymLinks)"
    echo "   ** Other"
-   echo "      x = Exit"
+   echo "      q = Quit"
    echo ""
    read -t10 -p "*** Enter Choice w/in 10sec Timer [Default: None]:"
    # [] = Logic-Test Construct
@@ -262,9 +262,9 @@ do
       startup_BatteryMonitor_Fn
       #jwc o Do Not Exit Yet, Manual Exit Required: break
       ;;
-   [xX]*)
+   [qQ]*)
       echo
-      echo "*** Chosen: x"
+      echo "*** Chosen: q"
       break
       ;;
    *) 
