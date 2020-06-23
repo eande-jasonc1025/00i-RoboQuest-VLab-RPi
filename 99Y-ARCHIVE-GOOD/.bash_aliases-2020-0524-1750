@@ -1,0 +1,15 @@
+# * Aliases: Do NOT have any spaces or will cause error
+# * Can Activate by '~/source .bashrc'
+
+# Aliases: General
+alias ll='ls -l'
+alias llt='ls -lt'
+alias la='ls -Al'
+alias lat='ls -Alt'
+alias l='ls -CF'
+
+# Soft Link to Directory
+ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ Link_RpiSetup
+
+# Alias: VideoStream
+alias Alias_VideoStream='/home/pi/01-Jwc/02i-Rpi-Setup/videostream-stage01_stage02-wrapper.sh'

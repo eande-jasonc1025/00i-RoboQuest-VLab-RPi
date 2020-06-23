@@ -1,0 +1,182 @@
+#!/bin/bash
+##jwc y #!/bin/bash -x
+##jwc o #!/bin/bash
+
+# [] = Logic-Test Construct
+# () = Subshell Process
+# {} = Variable/Parameter Subsitution
+
+# 'set -x' debug on
+# 'set +x' debug off
+
+# 'source ~/.bashrc'  restarts './bashrc'
+ 
+
+# Functions must be defined before being called
+#
+
+setup_SymLinks_Fn() {
+
+   ##jwc y set -x  # debug on
+
+   # Symbolic (Sym) Links to Directories
+   symLink="Link_RpiSetup"
+
+   ##jwc n if( -L ~/${Link_RpiSetup} ) ; then
+   ##jwc n if( -L ${symLink} ) ; then
+   ##jwc n if( -L ${symLink} ) ; then
+   ##jwc n if( -L "/home/pi/Link_RpiSetup" ) ; then
+   ##jwc n if( -L "/home/pi/Link_RpiSetup" ) ; then
+   ##jwc y TYJ if [ -L "/home/pi/Link_RpiSetup" ] ; then
+   ##jwc n if ( -L "/home/pi/Link_RpiSetup" ) ; then
+
+   # [] = Logic-Test Construct
+   ##jwc y if [ -L "/home/pi/Link_RpiSetup" ] ; then
+   if [ -L "/home/pi/${symLink}" ] ; then
+      echo
+      ##jwc y echo "*** SymLink 'Link_RpiSetup' Exists Already: Setup Not Needed."
+      echo "*** SymLink '${symLink}' Exists Already: Setup Not Needed."
+   else
+      echo
+      echo "*** SymLink '${symLink}' Exists Not: Setup Needed..."
+      ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/Link_RpiSetup
+      ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/${symLink}
+      echo
+      ##jwc y echo "*** SymLink 'Link_RpiSetup' Exists Now: Setup Done."
+      echo "*** SymLink '${symLink}' Exists Now: Setup Done."
+   fi
+
+   ##jwc y set +x  # debug off
+
+}
+
+startup_Htop_Fn() {
+   echo
+   # 'x' = exact match
+   # 'l' = output both: pid & process
+   ##jwc y if( ps aux | pgrep -xl "htop" ) ; then
+   ##jwc n if [[ ps aux | pgrep -xl "htop" ]] ; then
+   ##jwc n if [ ps aux | pgrep -xl "htop" ] ; then
+   # () = Subshell Process
+   if ( ps aux | pgrep -xl "htop" ) ; then
+      echo
+      echo "*** Process 'htop' Exists Already. Startup Not Needed."
+   else
+      echo
+      echo "*** Process 'htop' Exists Not: Startup Needed..."
+      lxterminal --geometry=120x15 -e "htop" &
+      echo
+      echo "*** Process 'htop' Exists Now: Startup Done."
+   fi
+}
+
+
+startup_VideoStream_UsbWebCam_Fn() {
+   echo
+   # 'x' = exact match
+   # 'l' = output both: pid & process
+   # () = Subshell Process
+   if( ps aux | pgrep -xl "motion" ) ; then
+      echo
+      echo "*** Process 'motion' Exists Already. Startup Not Needed."
+   else
+      echo
+      echo "*** Process 'motion' Exists Not: Startup Needed..."
+      sudo service motion restart &
+      sleep 10  # allow prior to stabilize
+      ## jwc o sleep 10  # allow prior to stabilize
+      ## jwc o chromium-browser 127.0.0.1:8080
+      echo
+      echo "*** Process 'motion' Exists Now: Startup Done."
+   fi
+
+   echo
+   # 'x' = exact match
+   # 'l' = output both: pid & process
+   # () = Subshell Process
+   if( ps aux | pgrep -xl "chromium-browse" ) ; then
+      echo 
+      echo "*** Process 'chromium-browse' Exists Already. Startup Not Needed."
+   else
+      echo
+      echo "*** Process 'chromium-browse' Exists Not: Startup Needed..."
+      ## jwc o sudo service motion restart &
+      ## jwc n chromium-browser 127.0.0.1:8080 
+      ## jwc n chromium-browser 127.0.0.1:8080 &
+      ## jwc y chromium-browser --use-gl=osmesa 127.0.0.1:8080 &
+      echo
+      echo "*** *** To avoid error: Failed to call method: org.freedesktop.DBus.Properties.Get: object_path= /org/freedesktop/UPower: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files *** ***"
+      echo "*** *** Add the following switches as temporary fix.  Long term solution is upgrade 'chromium-browser' *** ***"
+      chromium-browser --use-gl=osmesa --disable-gl-drawing-for-tests 127.0.0.1:8080 &
+      echo
+      echo "*** Process 'chromium-browse' Exists Now: Startup Done."
+   fi
+
+}
+
+
+startup_VideoStream_RpiCam_Fn() {
+   echo
+   # 'pgrep' more accurate/robust vs. 'grep' since will not match itself,
+   #     thus no false-positive
+   # 'x' = exact match
+   # 'l' = output both: pid & process
+   # () = Subshell Process
+   if( ps aux | pgrep -xl "raspivid" ) && ( ps aux | pgrep -xl "vlc" ) ; then
+      echo
+      echo "*** Process 'raspivid -> vlc' Exists Already. Startup Not Needed."
+   else
+      ##jwc y set -x  # debug on
+
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-01 'raspidvid': Startup Needed..."
+      lxterminal --geometry=60x15 -e "raspivid -o - -t 0 -hf -vf -a 12 -a $HOSTNAME -w 320 -h 180 -fps 20 -b 10000000 -v | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554}' :demux=h264" &
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-02: 'sleep': Startup Needed..."
+      sleep 5 # wait till prior command stabilize
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-03: 'vlc': Startup Needed..."
+      lxterminal --geometry=60x15 -e "vlc rtsp://127.0.0.1:8554/"
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-04: Startups Done."
+
+      ##jwc y set +x  # debug off 
+   fi
+}
+
+# Main Code
+
+while :
+do
+   echo
+   read -t10 -p "*** Setup/Startup: 1) SymLinks, 2) Cpu-Load-Manager 'htop' and 3) 'VideoStream-UsbWebcam'? [w/in timer: y/n]:"
+   # [] = Logic-Test Construct
+   if [ $? -gt 128 ]; then
+      echo
+      echo "*** Timed Out Waiting for User Response"
+      break
+   fi
+
+   case $REPLY in
+   [yY]*)
+      echo
+      echo "*** Setup/Startup: Yes."
+      setup_SymLinks_Fn
+      startup_Htop_Fn
+      # jwc not needed since for Rpi Cameras: 'startup_VideoStream_RpiCam_Fn'
+      # jwc following instead needed for Usb Webcams
+      startup_VideoStream_UsbWebCam_Fn
+      break
+      ;;
+   [nN]*)
+      echo
+      echo "*** Setup/Startup: No."
+      break
+      ;;
+   *) 
+      echo
+      echo "*** Setup/Startup: Please enter 'y' or 'n'."
+      ;;
+   esac  # end case
+done
+

@@ -1,0 +1,107 @@
+#!/bin/bash
+##jwc y #!/bin/bash -x
+##jwc o #!/bin/bash
+
+# 'set -x' debug on
+# 'set +x' debug off
+
+# 'source ~/.bashrc'  restarts './bashrc'
+ 
+
+# Functions must be defined before being called
+#
+
+setup_SymLinks_Fn() {
+
+   set -x  # debug on
+
+   # Symbolic (Sym) Links to Directories
+   if [ ! -L ${Link_RpiSetup} ] ; then
+      echo
+      echo "*** SymLink 'Link_RpiSetup' Exists Not: Setup Needed..."
+      ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ Link_RpiSetup
+      echo
+      echo "*** SymLink 'Link_RpiSetup' Exists Now: Setup Done."
+   else
+      echo
+      echo "*** SymLink 'Link_RpiSetup' Exists Already: Setup Not Needed."
+   fi
+
+   set +x  # debug off
+
+}
+
+startup_Htop_Fn() {
+   # 'x' = exact match
+   # 'l' = output both: pid & process
+   if( ps aux | pgrep -xl "htop" ) ; then
+      echo
+      echo "*** Process 'htop' Exists Already. Startup Not Needed."
+   else
+      echo
+      echo "*** Process 'htop' Exists Not: Startup Needed..."
+      lxterminal --geometry=120x15 -e "htop" &
+      echo
+      echo "*** Process 'htop' Exists Now: Startup Done."
+   fi
+}
+
+startup_Alias_VideoStream_Fn() {
+   # 'pgrep' more accurate/robust vs. 'grep' since will not match itself,
+   #    thus no false-positive
+   if( ps aux | pgrep -xl "raspivid -> vlc" ) ; then
+      echo
+      echo "*** Process 'raspivid -> vlc' Exists Already. Startup Not Needed.."
+   else
+      ##jwc y set -x  # debug on
+
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-01 'raspidvid': Startup Needed..."
+      lxterminal --geometry=60x15 -e "raspivid -o - -t 0 -hf -vf -a 12 -a $HOSTNAME -w 320 -h 180 -fps 20 -b 10000000 -v | cvlc -vvv stream:///dev/stdin --sout '#rtp{sdp=rtsp://:8554}' :demux=h264" &
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-02: 'sleep': Startup Needed..."
+      sleep 5 # wait till prior command stabilize
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-03: 'vlc': Startup Needed..."
+      lxterminal --geometry=60x15 -e "vlc rtsp://127.0.0.1:8554/"
+      echo
+      echo "*** Process 'raspivid -> vlc': Stage-04: Startups Done."
+
+      ##jwc y set +x  # debug off 
+   fi
+}
+
+# Main Code
+
+while :
+do
+   echo
+   read -t10 -p "*** Setup/Startup: 1) SymLinks, 2) Cpu-Manager 'htop' and 3) 'Alias_VideoStream'? [y/n]:"
+   echo
+   if [ $? -gt 128 ]; then
+      echo
+      echo "*** Timed Out Waiting for User Response"
+      break
+   fi
+
+   case $REPLY in
+   [yY]*)
+      echo
+      echo "*** Setup/Startup: Yes."
+      setup_SymLinks_Fn
+      startup_Htop_Fn
+      startup_Alias_VideoStream_Fn
+      break
+      ;;
+   [nN]*)
+      echo
+      echo "*** Setup/Startup: No."
+      break
+      ;;
+   *) 
+      echo
+      echo "*** Setup/Startup: Please enter 'y' or 'n'."
+      ;;
+   esac  # end case
+done
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# 'x' = exact match
+# 'l' = output both: pid & process
+if( ps aux | pgrep -xl "htop" ) ; then
+   echo "*** Process 'htop' already running."
+else 
+   lxterminal -e "htop"
+   echo "*** Process 'htop' will start running." 
+fi

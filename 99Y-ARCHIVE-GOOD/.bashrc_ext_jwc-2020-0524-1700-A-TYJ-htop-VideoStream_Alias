@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# 'x' = exact match
+# 'l' = output both: pid & process
+if( ps aux | pgrep -xl "htop" ) ; then
+   echo "*** Process 'htop' already running."
+else 
+   lxterminal --geometry=100x15 -e "htop" &
+   echo "*** Process 'htop' will start running." 
+fi
+
+if( ps aux | pgrep -xl "raspivid" ) ; then
+   echo "*** Process-Alias 'VideoStream_Alias' already running."
+else
+   lxterminal --geometry=30x15 -e "VideoStream_Alias" &
+   echo "*** Process-Alias 'VideoStream_Alias' will start running."
+fi

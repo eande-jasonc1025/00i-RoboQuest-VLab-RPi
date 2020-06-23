@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Functions must be defined before being called
+#
+
+start_Htop_Fn() {
+  # 'x' = exact match
+  # 'l' = output both: pid & process
+  if( ps aux | pgrep -xl "htop" ) ; then
+     echo "*** Process 'htop' already running."
+  else
+     lxterminal --geometry=100x15 -e "htop" &
+     echo "*** Process 'htop' will start running."
+  fi
+}
+
+start_Alias_VideoStream() {
+  # 'pgrep' more accurate/robust vs. 'grep' since will not match itself,
+  #    thus no false-positive
+  if( ps aux | pgrep -xl "raspivid" ) ; then
+     echo "*** Process-Alias 'Alias_VideoStream' already running."
+  else
+     lxterminal --geometry=30x15 -e "Alias_VideoStream" &
+     echo "*** Process-Alias 'Alias_VideoStream' will start running."
+  fi
+}
+
+# Main Code
+
+while :
+do
+  read -t10 -p "*** Start: 1) CPU-Load-Monitor 'htop' and 2) 'Alias_VideoStream'? [y/n]:"
+  if [ $? -gt 128 ]; then
+    echo "*** Timed Out Waiting for User Response"
+    break
+  fi
+
+  case $REPLY in
+  [yY]*)
+    echo "*** Starting..."
+    start_Htop_Fn
+    start_Alias_VideoStream
+    break
+    ;;
+  [nN]*)
+    echo "*** Starting Not."
+    break
+    ;;
+  *) echo "*** Starting Not. Please enter 'y' or 'n'."
+     ;;
+  esac  # end case
+done
+

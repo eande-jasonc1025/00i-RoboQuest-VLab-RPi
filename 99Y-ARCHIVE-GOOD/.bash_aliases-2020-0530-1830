@@ -1,0 +1,24 @@
+# * Aliases: Do NOT have any spaces or will cause error
+# * Can Activate by '~/source .bashrc'
+# 'alias' lists aliases
+
+# Aliases: Directory/File Management
+alias ll='ls -l'
+alias lla='ls -Al'
+alias llt='ls -lt'
+alias llat='ls -Alt'
+alias lcf='ls -CF'
+
+alias cp='cp -v'
+alias mv='mv -v'
+alias rm='rm -v'
+alias mkdir='mkdir -v'
+
+# Aliases: 'VideoStream'
+#
+#   Requires 'sudo service motion restart'
+#   Good for Usb Webcam
+#   'chromium-browser localhost:8080' not work
+alias Alias_VideoStream='chromium-browser 127.0.0.1:8080'
+#   Obsolete since mainly for Raspi Camera
+alias Alias_VideoStream_02='/home/pi/01-Jwc/02i-Rpi-Setup/videostream-stage01_stage02-wrapper.sh'
