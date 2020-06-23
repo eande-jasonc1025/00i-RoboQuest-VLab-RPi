@@ -1,0 +1,19 @@
+auto
+iface  inet dhcp
+
+
+
+
+
+
+
+auto wlan0:
+iface wlan0: inet static
+	address  192.168.1.75
+	wpa-ssid pi
+	wpa-psk Jesus333!
+
+
+
+
+
