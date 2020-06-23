@@ -1,0 +1,21 @@
+ROBOT RESET README
+
+The program will turn off the respective RPi for five seconds and then turn it back on.  Each RPi is ON by default.  
+
+launch in terminal with the following commands:
+
+cd Desktop
+Python3 robotReset.py
+
+
+Each RPi is NOT necessarily connected to the corresponding relay number (ex: Rpi1 = Relay #1)
+
+The RPi/Relay Map is below:
+
+RPi# | Relay# 
+  1     1
+  2	2
+  3	4
+  4	5
+  5     7
+  6	8
