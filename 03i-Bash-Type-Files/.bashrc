@@ -1,3 +1,10 @@
+# TODO List
+#
+#     jwc 2020-0624 Perhaps symbolic link to make dir-path dynamic and 
+#     \ not harccoded to '/01-RoboQuest/roboquest-vlab--rpi/'
+#     \ also for '.bash_aliases' & '.bashrc_ext_jwc'
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
