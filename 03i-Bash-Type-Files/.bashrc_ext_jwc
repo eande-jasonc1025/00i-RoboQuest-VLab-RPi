@@ -7,7 +7,8 @@
 # \ Also, 'source ~/.bash_aliases' right after to activate expansion 
 #
 shopt -s expand_aliases
-source ~/.bash_aliases
+##jwc y source ~/.bash_aliases
+source /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases
 
 # [] = Logic-Test Construct
 # () = Subshell Process
@@ -24,7 +25,8 @@ setup_SymLinks_Fn() {
    ##jwc y set -x  # debug on
 
    # Symbolic (Sym) Links to Directories
-   symLink="Link_RpiSetup"
+   ##jwc y symLink="Link_RpiSetup"
+   symLink="Link_roboquest-vlab--rpi"
 
    ##jwc n if( -L ~/${Link_RpiSetup} ) ; then
    ##jwc n if( -L ${symLink} ) ; then
@@ -44,7 +46,8 @@ setup_SymLinks_Fn() {
       echo
       echo "*** SymLink '${symLink}' Exists Not: Setup Needed..."
       ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/Link_RpiSetup
-      ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/${symLink}
+      ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/${symLink}
+      ln -s /home/pi/01-RoboQuest/roboquest-vlab--rpi/ /home/pi/${symLink}
       echo
       ##jwc y echo "*** SymLink 'Link_RpiSetup' Exists Now: Setup Done."
       echo "*** SymLink '${symLink}' Exists Now: Setup Done."
@@ -111,7 +114,8 @@ startup_ServerRackInBox_PowerCycle_Fn() {
    else
       echo
       echo "*** Process 'ServerRackInBox_PowerCycle: robotReset.py' Exists Not. Startup Needed..."
-      python3 /home/pi/Link_RpiSetup/04p-ServerInRackBox-RelaySwitch/robotReset.py
+      ##jwc y python3 /home/pi/Link_RpiSetup/04p-ServerInRackBox-RelaySwitch/robotReset.py
+      python3 /home/pi/Link_roboquest-vlab--rpi/04p-ServerRackInBox-RelaySwitch/robotReset.py
       echo
       echo "*** Process 'ServerRackInBox_PowerCycle: robotReset.py' Exists Now. Startup Done."
    fi
@@ -200,14 +204,14 @@ do
    echo "   ** Full-Systems Setup/Startup"
    echo "      s = Station: Bot"
    echo "          * SymLinks, Cpu-Load-Manager 'htop'"
-   echo "      c = Camera"
+   echo "      [c = Camera (Future Feature)]" 
    echo "          * SymLinks, Cpu-Load-Manager 'htop', 'VideoStream-UsbWebcam'"
-   echo "      m = Mobile: Bot [Future Feature]"
+   echo "      [m = Mobile: Bot (Future Feature)]"
    echo "          * SymLinks, Cpu-Load-Manager 'htop', 'VideoStream-UsbWebcam'"
    echo "   ** Admin Tools"
    echo "      ac = Admin: Cpu-Load-Manager 'htop'         (+ SymLinks)"
    echo "      ap = Admin: Power-Cycle ~ Hard Reboot       (+ SymLinks)"
-   echo "      ab = Admin: Battery Monitor & Email Warning (+ SymLinks)"
+   echo "      [ab = Admin: Battery Monitor & Email Warning (+ SymLinks) (Future Feature)]"
    echo "   ** Other"
    echo "      q = Quit"
    echo ""

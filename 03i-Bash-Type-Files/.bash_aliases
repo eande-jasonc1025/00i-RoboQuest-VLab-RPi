@@ -45,8 +45,9 @@ alias Alias_VideoStream_Stop='sudo service motion stop'
 #   'chromium-browser localhost:8080' not work
 alias Alias_VideoStream_App='chromium-browser 127.0.0.1:8080'
 #   Obsolete since mainly for Raspi Camera
-alias Alias_VideoStream_02='/home/pi/01-Jwc/02i-Rpi-Setup/videostream-stage01_stage02-wrapper.sh'
-
+#jwc y alias Alias_VideoStream_02='/home/pi/01-Jwc/02i-Rpi-Setup/videostream-stage01_stage02-wrapper.sh'
+alias Alias_VideoStream_02='/home/pi/01-RoboQuest/roboquest-vlab--rpi/04h-RaspiVid-Vlc--VideoStream/videostream-stage01_stage02-wrapper.sh'
 
 # Aliases: 'BatteryMonitor'
-alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+#jwc y alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+alias Alias_BatteryMonitor='python /home/pi/01-RoboQuest/roboquest-vlab--rpi/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
