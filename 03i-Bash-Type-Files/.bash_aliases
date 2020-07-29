@@ -51,3 +51,7 @@ alias Alias_VideoStream_02='/home/pi/01-RoboQuest/roboquest-vlab--rpi/04h-RaspiV
 # Aliases: 'BatteryMonitor'
 #jwc y alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
 alias Alias_BatteryMonitor='python /home/pi/01-RoboQuest/roboquest-vlab--rpi/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+
+# Aliases: 'Screen_SerialMonitor'
+#jwc y alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+alias Alias_Screen_SerialMonitor='sudo screen /dev/ttyACM0 115200'
