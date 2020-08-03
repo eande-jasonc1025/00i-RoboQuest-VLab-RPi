@@ -1,3 +1,26 @@
+#!/bin/bash
+
+# First Line Triggers Debug Modes, if Needed
+#
+#!/bin/bash -xv
+##jwc y #!/bin/bash -x
+
+# set -x: x-trace (x-ray) on
+# set -v: verbose print line before excution
+# set -u: unbound, unset variables expose
+# set +xvu: Must turn off at end, or such mode will affect subsequent interactive mode
+
+# TODO List
+#
+#     jwc 2020-0624 Perhaps symbolic link to make dir-path dynamic and 
+#     \ not harccoded to '/01-RoboQuest/roboquest-vlab--rpi/'
+#     \ also for '.bash_aliases' & '.bashrc_ext_jwc'
+#     jwc 2020-0801
+#     \  ln -s /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc        /home/pi/.bashrc
+#     \  ln -s /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases   /home/pi/.bash_aliases
+#     \  ln -s /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc /home/pi/.bashrc_ext_jwc
+#
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -93,12 +116,23 @@ fi
 #alias l='ls -CF'
 
 # Alias definitions.
+#
+#
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+##jwc o if [ -f ~/.bash_aliases ]; then
+# Dev Environment
+#
+if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
+    ##jwc o . ~/.bash_aliases
+    . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
+# Final  Environment
+#
+elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
+    ##jwc o . ~/.bash_aliases
+    . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -113,8 +147,19 @@ if ! shopt -oq posix; then
 fi
 
 # jwc: extension script
-/home/pi/01-Jwc/02i-Rpi-Setup/.bashrc_ext_jwc
+#
+#
+# Dev Environment
+#
+##jwc y /home/pi/01-Jwc/02i-Rpi-Setup/.bashrc_ext_jwc
+if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
+    ##jwc o . ~/.bash_aliases
+    . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc
+# Final  Environment
+#
+elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
+    ##jwc o . ~/.bash_aliases
+    . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc
+fi
 echo
 echo "*** '.bashrc_ext_jwc': Done."
-
-

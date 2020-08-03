@@ -45,8 +45,17 @@ alias Alias_VideoStream_Stop='sudo service motion stop'
 #   'chromium-browser localhost:8080' not work
 alias Alias_VideoStream_App='chromium-browser 127.0.0.1:8080'
 #   Obsolete since mainly for Raspi Camera
-alias Alias_VideoStream_02='/home/pi/01-Jwc/02i-Rpi-Setup/videostream-stage01_stage02-wrapper.sh'
+#jwc y alias Alias_VideoStream_02='/home/pi/01-Jwc/02i-Rpi-Setup/videostream-stage01_stage02-wrapper.sh'
+alias Alias_VideoStream_02='/home/pi/01-RoboQuest/roboquest-vlab--rpi/04h-RaspiVid-Vlc--VideoStream/videostream-stage01_stage02-wrapper.sh'
+#
+# Aliases: RaspiVid -> Console:'VLC'
+alias Alias_VideoStream_03="raspivid -o - -t 0 -vf -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264"
 
 
 # Aliases: 'BatteryMonitor'
-alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+#jwc y alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+alias Alias_BatteryMonitor='python /home/pi/01-RoboQuest/roboquest-vlab--rpi/04j-PiUptimeUps-AlchemyPowerDOTCom/uptime-2.0-Python3.py'
+
+
+# Aliases: 'Screen_SerialMonitor'
+alias Alias_Screen_SerialMonitor='sudo screen /dev/ttyACM0 115200'
