@@ -39,7 +39,8 @@ setup_SymLinks_Fn() {
 
    # Symbolic (Sym) Links to Directories
    ##jwc y symLink="Link_RpiSetup"
-   symLink="Link_roboquest-vlab--rpi"
+   ##jwc y symLink="Link_roboquest-vlab--rpi"
+   symLink="Link_RpiSetup"
 
    ##jwc n if( -L ~/${Link_RpiSetup} ) ; then
    ##jwc n if( -L ${symLink} ) ; then
@@ -60,7 +61,8 @@ setup_SymLinks_Fn() {
       echo "*** SymLink '${symLink}' Exists Not: Setup Needed..."
       ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/Link_RpiSetup
       ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/${symLink}
-      ln -s /home/pi/01-RoboQuest/roboquest-vlab--rpi/ /home/pi/${symLink}
+      ##jwc y ln -s /home/pi/01-RoboQuest/roboquest-vlab--rpi/ /home/pi/${symLink}
+      ln -s /home/pi/00-Rpi-Setup/ /home/pi/${symLink}
       echo
       ##jwc y echo "*** SymLink 'Link_RpiSetup' Exists Now: Setup Done."
       echo "*** SymLink '${symLink}' Exists Now: Setup Done."
@@ -128,7 +130,8 @@ startup_ServerRackInBox_PowerCycle_Fn() {
       echo
       echo "*** Process 'ServerRackInBox_PowerCycle: robotReset.py' Exists Not. Startup Needed..."
       ##jwc y python3 /home/pi/Link_RpiSetup/04p-ServerInRackBox-RelaySwitch/robotReset.py
-      python3 /home/pi/Link_roboquest-vlab--rpi/04p-ServerRackInBox-RelaySwitch/robotReset.py
+      ##jwc y python3 /home/pi/Link_roboquest-vlab--rpi/04p-ServerRackInBox-RelaySwitch/robotReset.py
+      python3 /home/pi/Link_RpiSetup/04p-ServerInRackBox-RelaySwitch/robotReset.py
       echo
       echo "*** Process 'ServerRackInBox_PowerCycle: robotReset.py' Exists Now. Startup Done."
    fi

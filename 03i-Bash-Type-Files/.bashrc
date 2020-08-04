@@ -14,7 +14,9 @@
 #
 #     jwc 2020-0624 Perhaps symbolic link to make dir-path dynamic and 
 #     \ not harccoded to '/01-RoboQuest/roboquest-vlab--rpi/'
-#     \ also for '.bash_aliases' & '.bashrc_ext_jwc'
+#     \ not harccoded to '/00-Rpi-Setup/'
+#     \ but rather to Symbolic-SoftLink: '/Link_RpiSetup/'
+#     \ yet keep Non-Symbolic-Link for .bash-type files: '.bashrc', '.bash_aliases' & '.bashrc_ext_jwc'
 #     jwc 2020-0801
 #     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc         /home/pi/.bashrc
 #     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases   /home/pi/.bash_aliases
@@ -123,19 +125,20 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 ##jwc o if [ -f ~/.bash_aliases ]; then
-# Dev Environment
 #
 ##jwc y if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
 if [ -f /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
     ##jwc o . ~/.bash_aliases
     ##jwc y . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
     . /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
-# Final  Environment
+#jwc y
 #
-##jwc y elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
-elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
-    ##jwc o . ~/.bash_aliases
-    . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases
+# # Final  Environment
+# #
+# ##jwc y elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
+# elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
+#     ##jwc o . ~/.bash_aliases
+#     . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -160,11 +163,13 @@ if [ -f /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
     ##jwc o . ~/.bash_aliases
     ##jwc y . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc
     . /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc
-# Final  Environment
+#jwc y
 #
-elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
-    ##jwc o . ~/.bash_aliases
-    . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc
+# # Final  Environment
+# #
+# elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
+#     ##jwc o . ~/.bash_aliases
+#     . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc
 fi
 echo
 echo "*** '.bashrc_ext_jwc': Done."
