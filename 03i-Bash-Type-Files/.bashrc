@@ -124,6 +124,10 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
+##jwc
+#
+# set -xv
+
 ##jwc o if [ -f ~/.bash_aliases ]; then
 #
 ##jwc y if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
