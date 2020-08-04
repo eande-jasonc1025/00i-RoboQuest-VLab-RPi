@@ -16,9 +16,9 @@
 #     \ not harccoded to '/01-RoboQuest/roboquest-vlab--rpi/'
 #     \ also for '.bash_aliases' & '.bashrc_ext_jwc'
 #     jwc 2020-0801
-#     \  ln -s /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc        /home/pi/.bashrc
-#     \  ln -s /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases   /home/pi/.bash_aliases
-#     \  ln -s /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc /home/pi/.bashrc_ext_jwc
+#     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc         /home/pi/.bashrc
+#     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases   /home/pi/.bash_aliases
+#     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc /home/pi/.bashrc_ext_jwc
 #
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -125,11 +125,14 @@ fi
 ##jwc o if [ -f ~/.bash_aliases ]; then
 # Dev Environment
 #
-if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
+##jwc y if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
+if [ -f /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
     ##jwc o . ~/.bash_aliases
-    . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
+    ##jwc y . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
+    . /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
 # Final  Environment
 #
+##jwc y elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
 elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases ]; then
     ##jwc o . ~/.bash_aliases
     . /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bash_aliases
@@ -152,9 +155,11 @@ fi
 # Dev Environment
 #
 ##jwc y /home/pi/01-Jwc/02i-Rpi-Setup/.bashrc_ext_jwc
-if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
+##jwc y if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
+if [ -f /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
     ##jwc o . ~/.bash_aliases
-    . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc
+    ##jwc y . /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc
+    . /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc
 # Final  Environment
 #
 elif [ -f /home/pi/01-RoboQuest/roboquest-vlab--rpi/03i-Bash-Type-Files/.bashrc_ext_jwc ]; then
