@@ -214,6 +214,28 @@ startup_VideoStream_RpiCam_Fn() {
    fi
 }
 
+
+setup_Mobile_Bot_Fn() {
+   echo
+   echo "*** Process 'setup_Mobile_Bot_Fn()': Setup Needed..."
+   echo
+   echo "*** *** 'dmesg': Confirm No Key Issues"
+   echo
+   dmesg
+   echo
+   echo "*** *** 'Alias_VideoStream_Status': Confirm Inactive to Avoid Camera-Device-Busy Issue"
+   echo
+   Alias_VideoStream_Status
+   echo
+   echo "*** *** 'i2cdetect -y 1': Confirm I2C-Devices Powered to Show On I2C-Address-Map"
+   echo
+   i2cdetect -y 1
+   echo
+   echo "*** Process 'setup_Mobile_Bot_Fn()': Setup Done."
+   echo
+}
+
+
 # Main Code
 
 while :
@@ -224,17 +246,17 @@ do
    echo "      s = Station: Bot"
    echo "          * SymLinks, Cpu-Load-Manager 'htop'"
    echo "      c = Camera"
-   echo "          * SymLinks, Cpu-Load-Manager 'htop', 'VideoStream-UsbWebcam'"
-   echo "    [ m = Mobile: Bot (Future Feature) ]"
-   echo "          * SymLinks, Cpu-Load-Manager 'htop', 'VideoStream-UsbWebcam'"
+   echo "          * SymLinks, Cpu-Load-Manager 'htop', 'VideoStream-UsbWebcam: Motion'"
+   echo "      m = Mobile: Bot"
+   echo "          * SymLinks, Cpu-Load-Manager 'htop'"
    echo "   ** Admin Tools"
    echo "      ac = Admin: Cpu-Load-Manager 'htop'      (+ SymLinks)"
    echo "      ap = Admin: Power-Cycle ~ Hard Reboot    (+ SymLinks)"
-   echo "    [ ab = Admin: Battery-Monitor & Email-Warn (+ SymLinks) (Future Feature) ]"
+   echo "      ab = Admin: Battery-Monitor & Email-Warn (+ SymLinks)"
    echo "   ** Other"
    echo "      q = Quit"
    echo ""
-   read -t10 -p "*** Enter Choice w/in 10sec Timer [Default: None]:"
+   read -t10 -p "*** Enter Choice w/in 10sec Timer [Default: Quit]:"
    # [] = Logic-Test Construct
    if [ $? -gt 128 ]; then
       echo
@@ -264,6 +286,13 @@ do
       startup_VideoStream_UsbWebCam_Fn
       break
       ;;
+    [mM])
+      echo
+      echo "*** Chosen: m"
+      setup_Mobile_Bot_Fn
+      startup_Htop_Fn
+      break
+      ;;
    [aA][cC])
       echo
       echo "*** Chosen: ac"
@@ -285,7 +314,7 @@ do
       startup_BatteryMonitor_Fn
       #jwc o Do Not Exit Yet, Manual Exit Required: break
       ;;
-   [qQ]*)
+   [qQ]|"")
       echo
       echo "*** Chosen: q"
       break
