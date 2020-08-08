@@ -223,6 +223,10 @@ setup_Mobile_Bot_Fn() {
    echo
    dmesg
    echo
+   echo "*** *** 'Alias_VideoStream_Stop': Make  Inactive to Avoid Camera-Device-Busy Issue"
+   echo
+   Alias_VideoStream_Stop
+   echo
    echo "*** *** 'Alias_VideoStream_Status': Confirm Inactive to Avoid Camera-Device-Busy Issue"
    echo
    Alias_VideoStream_Status
