@@ -1,0 +1,4 @@
+# set to 'yes' to enable the motion daemon
+##jwc o start_motion_daemon=no
+##jwc y start_motion_daemon=yes
+start_motion_daemon=yes
