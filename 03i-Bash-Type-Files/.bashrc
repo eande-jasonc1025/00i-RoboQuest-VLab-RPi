@@ -14,13 +14,13 @@
 #
 #     jwc 2020-0624 Perhaps symbolic link to make dir-path dynamic and 
 #     \ not harccoded to '/01-RoboQuest/roboquest-vlab--rpi/'
-#     \ not harccoded to '/00-Rpi-Setup/'
+#     \ not harccoded to '/00i-RoboQuest-VLab-RPi/'
 #     \ but rather to Symbolic-SoftLink: '/Link_RpiSetup/'
 #     \ yet keep Non-Symbolic-Link for .bash-type files: '.bashrc', '.bash_aliases' & '.bashrc_ext_jwc'
 #     jwc 2020-0801
-#     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc         /home/pi/.bashrc
-#     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases   /home/pi/.bash_aliases
-#     \  ln -s /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bashrc_ext_jwc /home/pi/.bashrc_ext_jwc
+#     \  ln -s /home/pi/00i-RoboQuest-VLab-RPi/03i-Bash-Type-Files/.bashrc         /home/pi/.bashrc
+#     \  ln -s /home/pi/00i-RoboQuest-VLab-RPi/03i-Bash-Type-Files/.bash_aliases   /home/pi/.bash_aliases
+#     \  ln -s /home/pi/00i-RoboQuest-VLab-RPi/03i-Bash-Type-Files/.bashrc_ext_jwc /home/pi/.bashrc_ext_jwc
 #
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
