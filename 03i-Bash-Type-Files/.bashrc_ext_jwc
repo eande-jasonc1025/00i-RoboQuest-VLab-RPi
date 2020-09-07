@@ -13,10 +13,10 @@ shopt -s expand_aliases
 # Dev Environment
 #
 ##jwc y if [ -f /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
-if [ -f /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases ]; then
+if [ -f /home/pi/00i-RoboQuest-VLab-RPi/03i-Bash-Type-Files/.bash_aliases ]; then
     ##jwc o . ~/.bash_aliases
    ##jwc y source /home/pi/01-Jwc/02i-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
-   source /home/pi/00-Rpi-Setup/03i-Bash-Type-Files/.bash_aliases
+   source /home/pi/00i-RoboQuest-VLab-RPi/03i-Bash-Type-Files/.bash_aliases
 ##jwc obsolete
 #
 # # Final  Environment
@@ -65,7 +65,7 @@ setup_SymLinks_Fn() {
       ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/Link_RpiSetup
       ##jwc y ln -s /home/pi/01-Jwc/02i-Rpi-Setup/ ~/${symLink}
       ##jwc y ln -s /home/pi/01-RoboQuest/roboquest-vlab--rpi/ /home/pi/${symLink}
-      ln -s /home/pi/00-Rpi-Setup/ /home/pi/${symLink}
+      ln -s /home/pi/00i-RoboQuest-VLab-RPi/ /home/pi/${symLink}
       echo
       ##jwc y echo "*** SymLink 'Link_RpiSetup' Exists Now: Setup Done."
       echo "*** SymLink '${symLink}' Exists Now: Setup Done."
@@ -215,15 +215,24 @@ startup_VideoStream_RpiCam_Fn() {
 }
 
 
-setup_Mobile_Bot_Fn() {
+setup_Dmesg_Fn() {
    echo
-   echo "*** Process 'setup_Mobile_Bot_Fn()': Setup Needed..."
+   echo "*** Process 'setup_Dmesg_Fn()': Setup Needed..."
    echo
    echo "*** *** 'dmesg': Confirm No Key Issues"
    echo
    dmesg
    echo
-   echo "*** *** 'Alias_VideoStream_Stop': Make  Inactive to Avoid Camera-Device-Busy Issue"
+   echo "*** Process 'setup_Dmesg_Fn()': Setup Done."
+   echo
+}
+
+
+setup_Mobile_Bot_Fn() {
+   echo
+   echo "*** Process 'setup_Mobile_Bot_Fn()': Setup Needed..."
+   echo
+   echo "*** *** 'Alias_VideoStream_Stop': Make Inactive to Avoid Camera-Device-Busy Issue"
    echo
    Alias_VideoStream_Stop
    echo
@@ -240,6 +249,23 @@ setup_Mobile_Bot_Fn() {
 }
 
 
+setup_Default_Fn() {
+   echo
+   echo "*** Process 'setup_Default_Fn()': Setup Needed..."
+   ##jwc y echo
+   echo "*** *** 'Alias_VideoStream_Stop': Make Inactive to Avoid Camera-Device-Busy Issue"
+   ##jwc y echo
+   ##jwc y takes too long as default: Alias_VideoStream_Stop
+   ##jwc y echo
+   echo "*** *** 'Alias_VideoStream_Status': Confirm Inactive to Avoid Camera-Device-Busy Issue"
+   ##jwc y echo
+   ##jwc y waits for a 'q' which is inconvenient as default: Alias_VideoStream_Status
+   ##jwc y echo
+   echo "*** Process 'setup_Default_Fn()': Setup Done."
+   ##jwc y echo
+}
+
+
 # Main Code
 
 while :
@@ -252,11 +278,12 @@ do
    echo "      c = Camera"
    echo "          * SymLinks, Cpu-Load-Manager 'htop', 'VideoStream-UsbWebcam: Motion'"
    echo "      m = Mobile: Bot"
-   echo "          * SymLinks, Cpu-Load-Manager 'htop'"
+   echo "          * SymLinks, Cpu-Load-Manager 'htop' ('Motion: Stop' avoids Cam-Conflict and CPU-Load)"
    echo "   ** Admin Tools"
    echo "      ac = Admin: Cpu-Load-Manager 'htop'      (+ SymLinks)"
    echo "      ap = Admin: Power-Cycle ~ Hard Reboot    (+ SymLinks)"
    echo "      ab = Admin: Battery-Monitor & Email-Warn (+ SymLinks)"
+   echo "      ad = Admin: Debug System Log 'dmesg'     (+ SymLinks)"
    echo "   ** Other"
    echo "      q = Quit"
    echo ""
@@ -293,6 +320,7 @@ do
     [mM])
       echo
       echo "*** Chosen: m"
+      setup_SymLinks_Fn
       setup_Mobile_Bot_Fn
       startup_Htop_Fn
       break
@@ -311,16 +339,25 @@ do
       startup_ServerRackInBox_PowerCycle_Fn
       #jwc o Do Not Exit Yet, Manual Exit Required: break
       ;;
-  [aA][bB])
+   [aA][bB])
       echo
       echo "*** Chosen: ab"
       setup_SymLinks_Fn
       startup_BatteryMonitor_Fn
       #jwc o Do Not Exit Yet, Manual Exit Required: break
       ;;
+   [aA][dD])
+      echo
+      echo "*** Chosen: ad"
+      setup_SymLinks_Fn
+      setup_Dmesg_Fn
+      #jwc o Do Not Exit Yet, Manual Exit Required: break
+      ;;
    [qQ]|"")
       echo
       echo "*** Chosen: q"
+      setup_SymLinks_Fn
+      setup_Default_Fn
       break
       ;;
    *) 
