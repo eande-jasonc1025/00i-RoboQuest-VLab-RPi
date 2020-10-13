@@ -60,3 +60,7 @@ alias Alias_BatteryMonitor='python /home/pi/Link_RpiSetup/04j-PiUptimeUps-Alchem
 
 # Aliases: 'Screen_SerialMonitor'
 alias Alias_Screen_SerialMonitor='sudo screen /dev/ttyACM0 115200'
+
+# Aliases: 'dmesg'
+alias Alias_Dmesg='dmesg'
+alias Alias_Dmesg_Usb='dmesg | grep "USB"'
