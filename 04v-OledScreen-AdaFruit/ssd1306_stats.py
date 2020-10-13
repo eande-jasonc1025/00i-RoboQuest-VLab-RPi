@@ -92,16 +92,23 @@ while True:
     # jwc 'awk' 'NF' = Number of Fields
     ##jwc o cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
     ##jwc y cmd = "top -bn1 | grep load | awk '{printf \"CPU: %.2f\", $(NF-2)}'"
-    cmd = "top -bn1 | grep Cpu | awk '{printf \"CPU %.0f\", $(2)}'"
+    cmd = "top -bn1 | grep \"%Cpu(s):\" | awk '{printf \"CPU %.0f\", $(2)}'"
     CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
     ##jwc o cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
-    cmd = "free -m | awk 'NR==2{printf \"Mem %s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
+    ##jwc y cmd = "free -m | awk 'NR==2{printf \"Mem %s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
+    ##jwc y cmd = "free -m | awk 'NR==2{printf \"Mem %s MB  %.2f%%\",$2,$3*100/$2 }'"
+    cmd = "free -m | awk 'NR==2{printf \"Mem %sMB  %.2f%%\",$2,$3*100/$2 }'"
     MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
     ##jwc o cmd = 'df -h | awk \'$NF=="/"{printf "Disk: %d/%d GB  %s", $3,$2,$5}\''
-    cmd = 'df -h | awk \'$NF=="/"{printf "Dsk %d/%d GB  %s", $3,$2,$5}\''
+    ##jwc y cmd = 'df -h | awk \'$NF=="/"{printf "Dsk %d/%d GB  %s", $3,$2,$5}\''
+    ##jwc y cmd = 'df -h | awk \'$NF=="/"{printf "Dsk %d GB  %s",$2,$5}\''
+    cmd = 'df -h | awk \'$NF=="/"{printf "Dsk %dGB %s",$2,$5}\''
     Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
+
+    cmd = "top -bn1 | grep \"top - \" | awk '{printf \"%s\", $3}'"
+    Time = subprocess.check_output(cmd, shell=True).decode("utf-8")
 
     # Write four lines of text.
 
@@ -110,9 +117,14 @@ while True:
     ##jwc y draw.text((x, top + 8), "IP: " + IP, font=font, fill=255)
     ##jwc o draw.text((x, top + 8), CPU, font=font, fill=255)
     ##jwc n draw.text((x, top + 8), IP + " / " + CPU, font=font, fill=255)
-    draw.text((x, top + 8), CPU + "%, " + IP, font=font, fill=255)
+    ##jwc y draw.text((x, top + 8), CPU + "% " + IP, font=font, fill=255)
+    ##jwc y draw.text((x, top + 8), CPU + "%, " + IP, font=font, fill=255)
+    draw.text((x, top + 8), CPU + "% " + IP, font=font, fill=255)
     draw.text((x, top + 16), MemUsage, font=font, fill=255)
-    draw.text((x, top + 25), Disk, font=font, fill=255)
+    ##jwc y draw.text((x, top + 25), Disk, font=font, fill=255)
+    ##jwc y draw.text((x, top + 25), Disk + " " + Time, font=font, fill=255)
+    ##jwc y draw.text((x, top + 25), Disk + ", " + Time, font=font, fill=255)
+    draw.text((x, top + 25), Disk + " " + Time, font=font, fill=255)
 
     # Display image.
     disp.image(image)
