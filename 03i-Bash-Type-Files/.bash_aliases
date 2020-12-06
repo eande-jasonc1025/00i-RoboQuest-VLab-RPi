@@ -64,3 +64,6 @@ alias Alias_Screen_SerialMonitor='sudo screen /dev/ttyACM0 115200'
 # Aliases: 'dmesg'
 alias Alias_Dmesg='dmesg'
 alias Alias_Dmesg_Usb='dmesg | grep "USB"'
+
+# Aliases: 'MS Visual Studio Code: VSC'
+alias Alias_Vsc='/usr/share/code/code --no-sandbox --unity-launch'
