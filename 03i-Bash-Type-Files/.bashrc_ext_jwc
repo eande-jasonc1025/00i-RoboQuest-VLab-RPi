@@ -261,6 +261,13 @@ setup_Default_Fn() {
    ##jwc y echo
    ##jwc y waits for a 'q' which is inconvenient as default: Alias_VideoStream_Status
    ##jwc y echo
+
+   # pyimagesearch: virtualenvwrapper
+   #
+   export WORKON_HOME=$HOME/.virtualenvs
+   export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+   source /usr/local/bin/virtualenvwrapper.sh
+
    echo "*** Process 'setup_Default_Fn()': Setup Done."
    ##jwc y echo
 }
